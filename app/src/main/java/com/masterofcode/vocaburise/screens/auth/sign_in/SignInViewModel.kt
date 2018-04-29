@@ -1,19 +1,20 @@
 package com.masterofcode.vocaburise.screens.auth.sign_in
 
-import android.databinding.Bindable
+import com.masterofcode.vocaburise.R
 import com.masterofcode.vocaburise.base.BaseViewModel
+import com.masterofcode.vocaburise.utils.weak
 
 /**
  * Created by andrews on 24.04.18.
  */
-class SignInViewModel :BaseViewModel() {
+class SignInViewModel : BaseViewModel() {
 
     var interactor by weak<SignInInteractor>()
 
-    var login: String = strRes(R.string.kuwaitPhoneCode).formatPhoneNumber()
+    var login: String = ""
         @Bindable get
         set(value) {
-            field = value.formatPhoneNumber()
+            field = value
             notifyPropertyChanged(BR.phoneNumber)
         }
 
@@ -50,7 +51,7 @@ class SignInViewModel :BaseViewModel() {
     }
 
     fun register() {
-        interactor?.register(address)
+        interactor?.register()
     }
 
     fun signIn() {
@@ -59,7 +60,7 @@ class SignInViewModel :BaseViewModel() {
             CredentialsManager.signIn(phoneNumber.removePhoneCodeFormatting(), password)
                     .async()
                     .doOnSubscribe { progressBarVisible = true }
-                    .doOnEvent { _, _ -> progressBarVisible = false}
+                    .doOnEvent { _, _ -> progressBarVisible = false }
                     .takeUntilCleared()
                     .subscribe({
                         if (!CredentialsManager.isActivated()) {
