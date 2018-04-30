@@ -17,38 +17,36 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
         <LinearLayout
             android:id="@+id/contentView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="true"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                app:errorText='@{vm.loginError}'>
+                app:errorText='@{vm.emailError}'>
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/loginInput"
+                    android:id="@+id/emailInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
                     android:hint="@string/signInScreenLogin"
                     android:inputType="textEmailAddress"
-                    android:text='@={vm.login}' />
+                    android:text='@={vm.email}' />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
                 app:errorText='@{vm.passwordError}'>
 
                 <android.support.design.widget.TextInputEditText

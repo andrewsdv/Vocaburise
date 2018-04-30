@@ -1,6 +1,8 @@
 package com.masterofcode.vocaburise.preferences.impl
 
 import com.chibatching.kotpref.KotprefModel
+import com.masterofcode.vocaburise.api.ApiRepository
+import com.masterofcode.vocaburise.api.IApiRepository
 import com.masterofcode.vocaburise.preferences.IUserPrefsManager
 import io.reactivex.Single
 
@@ -10,17 +12,22 @@ import io.reactivex.Single
 
 private object UserPrefs : KotprefModel() {
 
-    var token by nullableStringPref()
+    var accessToken by nullableStringPref()
 
 }
 
 class UserPrefsManagerImpl : IUserPrefsManager {
 
+    private val apiRepo: IApiRepository = ApiRepository()
+
+    override val accessToken: String?
+        get() = UserPrefs.accessToken
+
     override fun isLoggedIn(): Boolean {
-        return UserPrefs.token != null
+        return UserPrefs.accessToken != null
     }
 
-    override fun signIn(login: String, password: String): Single<Unit> {
-        return Single.just(Unit)
+    override fun signIn(email: String, password: String): Single<Boolean> {
+        return apiRepo.signIn(email, password)
     }
 }

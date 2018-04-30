@@ -16,18 +16,18 @@ class SignInViewModel : BaseViewModel() {
 
     var interactor by weak<SignInInteractor>()
 
-    var login: String = ""
+    var email: String = ""
         @Bindable get
         set(value) {
             field = value
-            notifyPropertyChanged(BR.login)
+            notifyPropertyChanged(BR.email)
         }
 
-    var loginError: String = ""
+    var emailError: String = ""
         @Bindable get
         set(value) {
             field = value
-            notifyPropertyChanged(BR.loginError)
+            notifyPropertyChanged(BR.emailError)
         }
 
     var password: String = ""
@@ -62,7 +62,7 @@ class SignInViewModel : BaseViewModel() {
     fun signIn() {
         validateInputs()
         if (isDataValid()) {
-            UserPrefsManager.signIn(login, password)
+            UserPrefsManager.signIn(email, password)
                     .async()
                     .doOnSubscribe { progressBarVisible = true }
                     .doOnEvent { _, _ -> progressBarVisible = false }
@@ -85,7 +85,7 @@ class SignInViewModel : BaseViewModel() {
     }
 
     private fun isDataValid(): Boolean {
-        return loginError.isEmpty() && passwordError.isEmpty()
+        return emailError.isEmpty() && passwordError.isEmpty()
     }
 
     private fun validateInputs() {
@@ -94,9 +94,9 @@ class SignInViewModel : BaseViewModel() {
     }
 
     private fun validateLogin() {
-        val loginTrimmed = login.trim()
-        login = loginTrimmed
-        loginError = if (login.isBlank()) {
+        val loginTrimmed = email.trim()
+        email = loginTrimmed
+        emailError = if (email.isBlank()) {
             strRes(R.string.signInScreenLoginEmptyError)
         } else ""
     }
