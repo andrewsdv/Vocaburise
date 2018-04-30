@@ -23,8 +23,7 @@
             android:id="@+id/contentView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:applyStatusBarPadding="@{true}">
+            android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -91,7 +90,7 @@
                 android:onClick='@{() -> vm.register()}'
                 android:text="@string/signInScreenRegisterButtonTitle"
                 android:textColor="@color/white"
-                android:visibility='@{vm.userBuild ? View.VISIBLE : View.GONE}' />
+                android:visibility="visible" />
 
         </LinearLayout>
 

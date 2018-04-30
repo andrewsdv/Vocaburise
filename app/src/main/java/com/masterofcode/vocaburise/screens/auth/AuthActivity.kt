@@ -1,12 +1,12 @@
 package com.masterofcode.vocaburise.screens.auth
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.masterofcode.vocaburise.R
 import com.masterofcode.vocaburise.base.BaseActivity
 import com.masterofcode.vocaburise.screens.auth.sign_in.SignInFragment
+import org.jetbrains.anko.startActivity
 
 /**
  * Created by andrews on 24.04.18.
@@ -38,10 +38,7 @@ class AuthActivity : BaseActivity(R.layout.activity_auth), AuthInteractor {
         const val EXTRA_STATE = "EXTRA_STATE"
 
         fun start(activity: Activity, state: AuthState) {
-            val bundle = Bundle().apply {
-                putString(EXTRA_STATE, state.toString())
-            }
-            activity.startActivity(Intent(activity, AuthActivity::class.java), bundle)
+            activity.startActivity<AuthActivity>(EXTRA_STATE to state)
         }
     }
 }

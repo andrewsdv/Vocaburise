@@ -8,8 +8,9 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.masterofcode.vocaburise.preferences.UserPreferencesManager
 import com.masterofcode.vocaburise.preferences.UserPrefsManager
+import com.masterofcode.vocaburise.screens.auth.AuthActivity
+import com.masterofcode.vocaburise.screens.auth.AuthState
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -21,7 +22,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
 
         if (!UserPrefsManager.isLoggedIn()) {
-
+            AuthActivity.start(this, AuthState.SIGN_IN)
+            return
         }
 
         fab.setOnClickListener { view ->

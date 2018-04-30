@@ -10,5 +10,8 @@
     <string name="signInScreenForgotPassword">Forgot password?</string>
     <string name="signInScreenSignInButtonTitle">Sign In</string>
     <string name="signInScreenRegisterButtonTitle">Register</string>
+    <string name="signInScreenLoginEmptyError">Please enter login</string>
+    <string name="signInScreenPasswordEmptyError">Please enter password</string>
+    <string name="error_unknown">Something went wrong</string>
 
 </resources>

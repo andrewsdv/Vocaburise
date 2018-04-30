@@ -10,6 +10,7 @@ import android.support.annotation.IdRes
 import android.support.annotation.LayoutRes
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import com.masterofcode.vocaburise.BR
 import android.view.View
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import io.reactivex.Maybe

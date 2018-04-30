@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.masterofcode.vocaburise.BR
 import com.trello.rxlifecycle2.components.support.RxFragment
 import io.reactivex.Maybe
 import io.reactivex.subjects.PublishSubject

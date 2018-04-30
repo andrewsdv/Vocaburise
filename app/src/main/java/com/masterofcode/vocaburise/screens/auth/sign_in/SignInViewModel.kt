@@ -1,7 +1,12 @@
 package com.masterofcode.vocaburise.screens.auth.sign_in
 
+import android.databinding.Bindable
+import com.masterofcode.vocaburise.BR
 import com.masterofcode.vocaburise.R
 import com.masterofcode.vocaburise.base.BaseViewModel
+import com.masterofcode.vocaburise.preferences.UserPrefsManager
+import com.masterofcode.vocaburise.utils.async
+import com.masterofcode.vocaburise.utils.strRes
 import com.masterofcode.vocaburise.utils.weak
 
 /**
@@ -15,14 +20,14 @@ class SignInViewModel : BaseViewModel() {
         @Bindable get
         set(value) {
             field = value
-            notifyPropertyChanged(BR.phoneNumber)
+            notifyPropertyChanged(BR.login)
         }
 
     var loginError: String = ""
         @Bindable get
         set(value) {
             field = value
-            notifyPropertyChanged(BR.phoneNumberError)
+            notifyPropertyChanged(BR.loginError)
         }
 
     var password: String = ""
@@ -57,17 +62,13 @@ class SignInViewModel : BaseViewModel() {
     fun signIn() {
         validateInputs()
         if (isDataValid()) {
-            CredentialsManager.signIn(phoneNumber.removePhoneCodeFormatting(), password)
+            UserPrefsManager.signIn(login, password)
                     .async()
                     .doOnSubscribe { progressBarVisible = true }
                     .doOnEvent { _, _ -> progressBarVisible = false }
                     .takeUntilCleared()
                     .subscribe({
-                        if (!CredentialsManager.isActivated()) {
-                            interactor?.activateAccount()
-                        } else {
-                            interactor?.finish(true)
-                        }
+                        interactor?.finish()
                     },
                             this::showErrorMessage
                     )
@@ -88,23 +89,23 @@ class SignInViewModel : BaseViewModel() {
     }
 
     private fun validateInputs() {
-        validatePhoneNumber()
+        validateLogin()
         validatePassword()
     }
 
-    private fun validatePhoneNumber() {
-        val phoneNumberTrimmed = phoneNumber.trim()
-        phoneNumber = phoneNumberTrimmed
-        phoneNumberError = phoneNumber.validatePhone()
+    private fun validateLogin() {
+        val loginTrimmed = login.trim()
+        login = loginTrimmed
+        loginError = if (login.isBlank()) {
+            strRes(R.string.signInScreenLoginEmptyError)
+        } else ""
     }
 
     private fun validatePassword() {
         // Make only sure password is not blank
         passwordError = if (password.isBlank()) {
             strRes(R.string.signInScreenPasswordEmptyError)
-        } else {
-            ""
-        }
+        } else ""
     }
 
 }

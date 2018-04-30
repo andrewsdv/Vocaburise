@@ -4,6 +4,12 @@ import android.arch.lifecycle.ViewModel
 import android.databinding.Bindable
 import android.databinding.Observable
 import android.databinding.PropertyChangeRegistry
+import io.reactivex.Flowable
+import io.reactivex.Maybe
+import io.reactivex.Single
+import io.reactivex.processors.PublishProcessor
+import io.reactivex.subjects.PublishSubject
+import java.util.concurrent.CancellationException
 
 /**
  * Created by andrews on 24.04.18.
@@ -11,6 +17,27 @@ import android.databinding.PropertyChangeRegistry
 open class BaseViewModel : ViewModel(), android.databinding.Observable {
     @Transient
     private var callbacks: PropertyChangeRegistry? = null
+
+    private val clearedProcessor = PublishProcessor.create<Unit>()
+    private val clearedSubject = PublishSubject.create<Unit>()
+
+    override fun onCleared() {
+        super.onCleared()
+        clearedProcessor.onNext(Unit)
+        clearedSubject.onNext(Unit)
+    }
+
+    fun <T> Flowable<T>.takeUntilCleared(): Flowable<T> = this.takeUntil(clearedProcessor)
+            .onErrorResumeNext { t: Throwable -> if (t is CancellationException) Flowable.empty() else Flowable.error(t) }
+
+    fun <T> Maybe<T>.takeUntilCleared(): Maybe<T> = this.takeUntil(clearedProcessor)
+            .onErrorResumeNext { t: Throwable -> if (t is CancellationException) Maybe.empty() else Maybe.error(t) }
+
+    fun <T> Single<T>.takeUntilCleared(): Maybe<T> = this.toMaybe().takeUntil(clearedProcessor)
+            .onErrorResumeNext { t: Throwable -> if (t is CancellationException) Maybe.empty() else Maybe.error(t) }
+
+    fun <T> io.reactivex.Observable<T>.takeUntilCleared(): io.reactivex.Observable<T> = this.takeUntil(clearedSubject)
+            .onErrorResumeNext { t: Throwable -> if (t is CancellationException) io.reactivex.Observable.empty() else io.reactivex.Observable.error(t) }
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback) {
         synchronized(this) {
