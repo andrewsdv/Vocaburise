@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import com.masterofcode.vocaburise.R
 import com.masterofcode.vocaburise.base.BaseActivity
 import com.masterofcode.vocaburise.screens.auth.sign_in.SignInFragment
+import com.masterofcode.vocaburise.screens.auth.sign_up.SignUpFragment
 import org.jetbrains.anko.startActivity
 
 /**
@@ -19,7 +20,7 @@ enum class AuthState {
 class AuthActivity : BaseActivity(R.layout.activity_auth), AuthInteractor {
 
     private val signInFragment = SignInFragment()
-    private val registerFragment = Fragment()
+    private val registerFragment = SignUpFragment()
 
     private fun getFragment(state: AuthState): Fragment = when (state) {
         AuthState.REGISTER -> registerFragment

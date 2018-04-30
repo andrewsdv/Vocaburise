@@ -4,7 +4,8 @@ import com.github.simonpercic.oklog3.OkLogInterceptor
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.masterofcode.vocaburise.BuildConfig
-import com.masterofcode.vocaburise.preferences.IUserPrefsManager
+import com.masterofcode.vocaburise.api.bodies.SignUpData
+import com.masterofcode.vocaburise.models.User
 import com.masterofcode.vocaburise.preferences.UserPrefsManager
 import io.reactivex.Single
 import okhttp3.*
@@ -75,6 +76,7 @@ class ApiRepository : IApiRepository {
                 .build()
     }
 
-    override fun signIn(login: String, password: String): Single<Boolean> = api.signIn(login, password)
+    override fun signIn(email: String, password: String): Single<Boolean> = api.signIn(email, password)
 
+    override fun signUp(data: SignUpData): Single<User> = api.signUp(data)
 }

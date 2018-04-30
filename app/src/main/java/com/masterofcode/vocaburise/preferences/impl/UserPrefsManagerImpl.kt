@@ -3,6 +3,8 @@ package com.masterofcode.vocaburise.preferences.impl
 import com.chibatching.kotpref.KotprefModel
 import com.masterofcode.vocaburise.api.ApiRepository
 import com.masterofcode.vocaburise.api.IApiRepository
+import com.masterofcode.vocaburise.api.bodies.SignUpData
+import com.masterofcode.vocaburise.models.User
 import com.masterofcode.vocaburise.preferences.IUserPrefsManager
 import io.reactivex.Single
 
@@ -29,5 +31,9 @@ class UserPrefsManagerImpl : IUserPrefsManager {
 
     override fun signIn(email: String, password: String): Single<Boolean> {
         return apiRepo.signIn(email, password)
+    }
+
+    override fun signUp(data: SignUpData): Single<User> {
+        return apiRepo.signUp(data)
     }
 }

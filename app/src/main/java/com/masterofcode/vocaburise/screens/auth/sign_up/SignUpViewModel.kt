@@ -1,20 +1,32 @@
-package com.masterofcode.vocaburise.screens.auth.sign_in
+package com.masterofcode.vocaburise.screens.auth.sign_up
 
 import android.databinding.Bindable
 import com.masterofcode.vocaburise.BR
 import com.masterofcode.vocaburise.R
+import com.masterofcode.vocaburise.api.bodies.SignUpData
 import com.masterofcode.vocaburise.base.BaseViewModel
 import com.masterofcode.vocaburise.preferences.UserPrefsManager
 import com.masterofcode.vocaburise.utils.async
 import com.masterofcode.vocaburise.utils.strRes
 import com.masterofcode.vocaburise.utils.weak
 
-/**
- * Created by andrews on 24.04.18.
- */
-class SignInViewModel : BaseViewModel() {
+class SignUpViewModel  : BaseViewModel() {
 
-    var interactor by weak<SignInInteractor>()
+    var interactor by weak<SignUpInteractor>()
+
+    var name: String = ""
+        @Bindable get
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.name)
+        }
+
+    var nameError: String = ""
+        @Bindable get
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.nameError)
+        }
 
     var email: String = ""
         @Bindable get
@@ -51,18 +63,14 @@ class SignInViewModel : BaseViewModel() {
             notifyPropertyChanged(BR.progressBarVisible)
         }
 
-    fun init(interactor: SignInInteractor) {
+    fun init(interactor: SignUpInteractor) {
         this.interactor = interactor
     }
 
     fun register() {
-        interactor?.register()
-    }
-
-    fun signIn() {
         validateInputs()
         if (isDataValid()) {
-            UserPrefsManager.signIn(email, password)
+            UserPrefsManager.signUp(SignUpData(name, email, password))
                     .async()
                     .doOnSubscribe { progressBarVisible = true }
                     .doOnEvent { _, _ -> progressBarVisible = false }
@@ -75,25 +83,30 @@ class SignInViewModel : BaseViewModel() {
         }
     }
 
-    fun forgotPassword() {
-
-    }
-
     private fun showErrorMessage(throwable: Throwable) {
         val message = throwable.message ?: strRes(R.string.error_unknown)
         interactor?.showErrorSnackbar(message, throwable)
     }
 
     private fun isDataValid(): Boolean {
-        return emailError.isEmpty() && passwordError.isEmpty()
+        return nameError.isEmpty() && emailError.isEmpty() && passwordError.isEmpty()
     }
 
     private fun validateInputs() {
-        validateLogin()
+        validateName()
+        validateEmail()
         validatePassword()
     }
 
-    private fun validateLogin() {
+    private fun validateName() {
+        val loginTrimmed = name.trim()
+        name = loginTrimmed
+        nameError = if (name.isBlank()) {
+            strRes(R.string.signInScreenEmailEmptyError)
+        } else ""
+    }
+
+    private fun validateEmail() {
         val loginTrimmed = email.trim()
         email = loginTrimmed
         emailError = if (email.isBlank()) {
