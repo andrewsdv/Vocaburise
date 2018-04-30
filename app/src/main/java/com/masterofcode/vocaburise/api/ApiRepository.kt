@@ -24,15 +24,12 @@ class ApiRepository : IApiRepository {
         private val BASE_URL = "http://vocaburise.herokuapp.com/api/v1/"
     }
 
-    private val userPrefsManager: IUserPrefsManager = UserPrefsManager
-
     private val api by lazy {
         val okHttp = OkHttpClient.Builder()
-                .addInterceptor(OkLogInterceptor.builder().build())
                 .addInterceptor { chain ->
                     val request = chain.request()
                     try {
-                        userPrefsManager.accessToken?.let {
+                        UserPrefsManager.accessToken?.let {
                             chain.proceed(
                                     request.newBuilder()
                                             .addHeader("Authorization", "Bearer $it")
