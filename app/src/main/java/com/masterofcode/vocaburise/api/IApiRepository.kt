@@ -9,7 +9,7 @@ import io.reactivex.Single
  */
 interface IApiRepository {
 
-    fun signIn(email: String, password: String): Single<Boolean>
+    fun signIn(email: String, password: String): Single<User>
     fun signUp(data: SignUpData): Single<User>
 
 }

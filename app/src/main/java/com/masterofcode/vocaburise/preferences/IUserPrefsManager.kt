@@ -11,7 +11,7 @@ interface IUserPrefsManager {
     val accessToken: String?
 
     fun isLoggedIn(): Boolean
-    fun signIn(email: String, password: String): Single<Boolean>
+    fun signIn(email: String, password: String): Single<User>
     fun signUp(data: SignUpData): Single<User>
 
 }

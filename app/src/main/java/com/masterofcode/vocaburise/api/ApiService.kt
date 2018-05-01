@@ -14,7 +14,7 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("users/login")
-    fun signIn(@Query(encoded = true, value = "email") email: String, @Query("password") password: String): Single<Boolean>
+    fun signIn(@Query(encoded = true, value = "email") email: String, @Query("password") password: String): Single<User>
 
     @POST("users/register")
     fun signUp(@Body data: SignUpData): Single<User>

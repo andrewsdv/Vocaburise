@@ -76,7 +76,7 @@ class ApiRepository : IApiRepository {
                 .build()
     }
 
-    override fun signIn(email: String, password: String): Single<Boolean> = api.signIn(email, password)
+    override fun signIn(email: String, password: String): Single<User> = api.signIn(email, password)
 
     override fun signUp(data: SignUpData): Single<User> = api.signUp(data)
 }

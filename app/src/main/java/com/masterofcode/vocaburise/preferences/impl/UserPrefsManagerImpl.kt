@@ -29,7 +29,7 @@ class UserPrefsManagerImpl : IUserPrefsManager {
         return UserPrefs.accessToken != null
     }
 
-    override fun signIn(email: String, password: String): Single<Boolean> {
+    override fun signIn(email: String, password: String): Single<User> {
         return apiRepo.signIn(email, password)
     }
 
