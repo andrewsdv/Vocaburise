@@ -7,6 +7,7 @@ import com.masterofcode.vocaburise.base.BaseViewModel
 import com.masterofcode.vocaburise.preferences.UserPrefsManager
 import com.masterofcode.vocaburise.utils.async
 import com.masterofcode.vocaburise.utils.strRes
+import com.masterofcode.vocaburise.utils.toast
 import com.masterofcode.vocaburise.utils.weak
 
 /**
@@ -68,7 +69,8 @@ class SignInViewModel : BaseViewModel() {
                     .doOnEvent { _, _ -> progressBarVisible = false }
                     .takeUntilCleared()
                     .subscribe({
-                        interactor?.finish()
+                        toast(strRes(R.string.done))
+                        interactor?.openWordsScreen()
                     },
                             this::showErrorMessage
                     )

@@ -6,7 +6,7 @@ package com.masterofcode.vocaburise.screens.auth.sign_in
 interface SignInInteractor {
 
     fun register()
-    fun finish()
+    fun openWordsScreen()
     fun showErrorSnackbar(message: String, throwable: Throwable?)
 
 }

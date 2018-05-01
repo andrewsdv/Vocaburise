@@ -15,5 +15,6 @@
     <string name="signInScreenEmailEmptyError">Please enter email</string>
     <string name="signInScreenPasswordEmptyError">Please enter password</string>
     <string name="error_unknown">Something went wrong</string>
+    <string name="done">Done!</string>
 
 </resources>

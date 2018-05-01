@@ -8,6 +8,7 @@ import com.masterofcode.vocaburise.base.BaseViewModel
 import com.masterofcode.vocaburise.preferences.UserPrefsManager
 import com.masterofcode.vocaburise.utils.async
 import com.masterofcode.vocaburise.utils.strRes
+import com.masterofcode.vocaburise.utils.toast
 import com.masterofcode.vocaburise.utils.weak
 
 class SignUpViewModel  : BaseViewModel() {
@@ -76,7 +77,8 @@ class SignUpViewModel  : BaseViewModel() {
                     .doOnEvent { _, _ -> progressBarVisible = false }
                     .takeUntilCleared()
                     .subscribe({
-                        interactor?.finish()
+                        toast(strRes(R.string.done))
+                        interactor?.openWordsScreen()
                     },
                             this::showErrorMessage
                     )
@@ -102,7 +104,7 @@ class SignUpViewModel  : BaseViewModel() {
         val loginTrimmed = name.trim()
         name = loginTrimmed
         nameError = if (name.isBlank()) {
-            strRes(R.string.signInScreenEmailEmptyError)
+            strRes(R.string.signUpScreenNameEmptyError)
         } else ""
     }
 

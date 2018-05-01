@@ -6,6 +6,7 @@ import com.masterofcode.vocaburise.R
 import com.masterofcode.vocaburise.base.BaseBoundVmFragment
 import com.masterofcode.vocaburise.databinding.FragmentSignInBinding
 import com.masterofcode.vocaburise.screens.auth.sign_up.SignUpFragment
+import com.masterofcode.vocaburise.screens.words.WordsActivity
 
 /**
  * Created by andrews on 24.04.18.
@@ -24,8 +25,9 @@ class SignInFragment : BaseBoundVmFragment<FragmentSignInBinding, SignInViewMode
         transaction?.commitAllowingStateLoss()
     }
 
-    override fun finish() {
-        finish()
+    override fun openWordsScreen() {
+        WordsActivity.start(activity!!)
+        activity?.finish()
     }
 
     override fun showErrorSnackbar(message: String, throwable: Throwable?) {

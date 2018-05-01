@@ -5,6 +5,7 @@ import android.view.View
 import com.masterofcode.vocaburise.R
 import com.masterofcode.vocaburise.base.BaseBoundVmFragment
 import com.masterofcode.vocaburise.databinding.FragmentSignUpBinding
+import com.masterofcode.vocaburise.screens.words.WordsActivity
 
 class SignUpFragment  : BaseBoundVmFragment<FragmentSignUpBinding, SignUpViewModel>(
         R.layout.fragment_sign_up, SignUpViewModel::class), SignUpInteractor {
@@ -14,8 +15,9 @@ class SignUpFragment  : BaseBoundVmFragment<FragmentSignUpBinding, SignUpViewMod
         vm.init(this)
     }
 
-    override fun finish() {
-        finish()
+    override fun openWordsScreen() {
+        WordsActivity.start(activity!!)
+        activity?.finish()
     }
 
     override fun showErrorSnackbar(message: String, throwable: Throwable?) {

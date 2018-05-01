@@ -7,11 +7,11 @@ import android.app.Application
  * Created by andrews on 30.04.18.
  */
 
-abstract class App : Application() {
+class BaseApp : Application() {
     companion object {
         @JvmStatic
         @SuppressLint("StaticFieldLeak")
-        lateinit var app: App
+        lateinit var app: BaseApp
             private set
     }
 

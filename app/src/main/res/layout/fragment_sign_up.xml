@@ -38,7 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:hint="@string/signInScreenLogin"
+                    android:hint="@string/signUpScreenName"
                     android:inputType="textCapWords"
                     android:text='@={vm.name}' />
 

@@ -3,7 +3,8 @@ package com.masterofcode.vocaburise.utils
 import android.databinding.BindingAdapter
 import android.support.annotation.StringRes
 import android.support.design.widget.TextInputLayout
-import com.masterofcode.vocaburise.App
+import android.widget.Toast
+import com.masterofcode.vocaburise.BaseApp
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -14,8 +15,11 @@ import io.reactivex.schedulers.Schedulers
 
 
 fun Any.strRes(@StringRes resId: Int, vararg formatArgs: Any): String {
-    return App.app.getString(resId, *formatArgs)
+    return BaseApp.app.getString(resId, *formatArgs)
 }
+
+fun Any.toast(message: CharSequence) =
+        Toast.makeText(BaseApp.app, message, Toast.LENGTH_LONG).show()
 
 // Rx Java extensions
 fun <T> Single<T>.subscribeOnIoThread(): Single<T> = subscribeOn(Schedulers.io())
