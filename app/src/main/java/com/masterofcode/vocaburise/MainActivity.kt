@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         if (!UserPrefsManager.isLoggedIn()) {
             AuthActivity.start(this, AuthState.SIGN_IN)
+            finish()
             return
         }
 
