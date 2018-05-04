@@ -11,7 +11,7 @@ import com.masterofcode.vocaburise.utils.strRes
 import com.masterofcode.vocaburise.utils.toast
 import com.masterofcode.vocaburise.utils.weak
 
-class SignUpViewModel  : BaseViewModel() {
+class SignUpViewModel : BaseViewModel() {
 
     var interactor by weak<SignUpInteractor>()
 
@@ -74,13 +74,15 @@ class SignUpViewModel  : BaseViewModel() {
             UserPrefsManager.signUp(SignUpData(name, email, password))
                     .async()
                     .doOnSubscribe { progressBarVisible = true }
-                    .doOnEvent { _, _ -> progressBarVisible = false }
                     .takeUntilCleared()
                     .subscribe({
+                        progressBarVisible = false
                         toast(strRes(R.string.done))
                         interactor?.openWordsScreen()
-                    },
-                            this::showErrorMessage
+                    }, {
+                        progressBarVisible = false
+                        showErrorMessage(it)
+                    }
                     )
         }
     }

@@ -36,7 +36,8 @@ class UserPrefsManagerImpl : IUserPrefsManager {
                 .doAfterNext { UserPrefs.accessToken = it.response().headers().get("Authorization") }
     }
 
-    override fun signUp(data: SignUpData): Single<User> {
-        return apiRepo.signUp(data)
+    override fun signUp(data: SignUpData): Observable<Result<User>> {
+        return Observable.defer { apiRepo.signUp(data) }
+                .doAfterNext { UserPrefs.accessToken = it.response().headers().get("Authorization") }
     }
 }
