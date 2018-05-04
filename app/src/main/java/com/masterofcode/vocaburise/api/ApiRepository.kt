@@ -5,9 +5,7 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.masterofcode.vocaburise.BuildConfig
 import com.masterofcode.vocaburise.api.bodies.SignUpData
-import com.masterofcode.vocaburise.models.User
 import com.masterofcode.vocaburise.preferences.UserPrefsManager
-import io.reactivex.Single
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -76,7 +74,7 @@ class ApiRepository : IApiRepository {
                 .build()
     }
 
-    override fun signIn(email: String, password: String): Single<User> = api.signIn(email, password)
+    override fun signIn(email: String, password: String) = api.signIn(email, password)
 
-    override fun signUp(data: SignUpData): Single<User> = api.signUp(data)
+    override fun signUp(data: SignUpData) = api.signUp(data)
 }
