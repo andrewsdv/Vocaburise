@@ -1,5 +1,6 @@
 package com.masterofcode.vocaburise
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -13,6 +14,7 @@ import com.masterofcode.vocaburise.screens.auth.AuthActivity
 import com.masterofcode.vocaburise.screens.auth.AuthState
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -88,5 +90,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    companion object {
+        fun start(activity: Activity) {
+            activity.startActivity<MainActivity>()
+        }
     }
 }

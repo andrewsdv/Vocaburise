@@ -10,4 +10,9 @@ data class User(
         val name: String,
         val email: String,
         val password: String
-) : Parcelable
+) : Parcelable {
+    companion object {
+        val EMPTY = User("", "", "")
+    }
+}
+
