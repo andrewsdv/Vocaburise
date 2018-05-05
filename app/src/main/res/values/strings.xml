@@ -14,7 +14,10 @@
     <string name="signUpScreenNameEmptyError">Please enter a name</string>
     <string name="signInScreenEmailEmptyError">Please enter email</string>
     <string name="signInScreenPasswordEmptyError">Please enter password</string>
-    <string name="error_unknown">Something went wrong</string>
+    <string name="errorUnknown">Something went wrong</string>
     <string name="done">Done!</string>
+    <string name="save">Save</string>
+    <string name="addWordsScreenWord">Word</string>
+    <string name="addWordsScreenTranslation">Translation</string>
 
 </resources>
