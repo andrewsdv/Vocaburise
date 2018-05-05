@@ -84,7 +84,7 @@ class SignInViewModel : BaseViewModel() {
     }
 
     private fun showErrorMessage(throwable: Throwable) {
-        val message = throwable.message ?: strRes(R.string.error_unknown)
+        val message = throwable.message ?: strRes(R.string.errorUnknown)
         interactor?.showErrorSnackbar(message, throwable)
     }
 

@@ -4,10 +4,10 @@ import com.chibatching.kotpref.KotprefModel
 import com.masterofcode.vocaburise.api.ApiRepository
 import com.masterofcode.vocaburise.api.IApiRepository
 import com.masterofcode.vocaburise.api.bodies.SignUpData
+import com.masterofcode.vocaburise.errorHandling.NetworkErrorWrapper
 import com.masterofcode.vocaburise.models.User
 import com.masterofcode.vocaburise.preferences.IUserPrefsManager
 import io.reactivex.Observable
-import io.reactivex.Single
 import retrofit2.adapter.rxjava2.Result
 
 /**
@@ -33,11 +33,23 @@ class UserPrefsManagerImpl : IUserPrefsManager {
 
     override fun signIn(email: String, password: String): Observable<Result<User>> {
         return Observable.defer { apiRepo.signIn(email, password) }
-                .doAfterNext { UserPrefs.accessToken = it.response().headers().get("Authorization") }
+                .doAfterNext {
+                    if (it.response().errorBody() != null) {
+                        val message = "${it.response().code()} ${it.response().message()}"
+                        throw NetworkErrorWrapper(message)
+                    }
+                    UserPrefs.accessToken = it.response().headers().get("Authorization")
+                }
     }
 
     override fun signUp(data: SignUpData): Observable<Result<User>> {
         return Observable.defer { apiRepo.signUp(data) }
-                .doAfterNext { UserPrefs.accessToken = it.response().headers().get("Authorization") }
+                .doAfterNext {
+                    if (it.response().errorBody() != null) {
+                        val message = "${it.response().code()} ${it.response().message()}"
+                        throw NetworkErrorWrapper(message)
+                    }
+                    UserPrefs.accessToken = it.response().headers().get("Authorization")
+                }
     }
 }
