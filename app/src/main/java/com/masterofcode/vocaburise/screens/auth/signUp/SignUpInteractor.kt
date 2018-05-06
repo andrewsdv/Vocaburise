@@ -1,4 +1,4 @@
-package com.masterofcode.vocaburise.screens.auth.sign_up
+package com.masterofcode.vocaburise.screens.auth.signUp
 
 interface SignUpInteractor {
 

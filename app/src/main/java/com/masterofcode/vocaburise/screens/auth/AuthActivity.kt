@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.masterofcode.vocaburise.R
 import com.masterofcode.vocaburise.base.BaseActivity
-import com.masterofcode.vocaburise.screens.auth.sign_in.SignInFragment
-import com.masterofcode.vocaburise.screens.auth.sign_up.SignUpFragment
+import com.masterofcode.vocaburise.screens.auth.signIn.SignInFragment
+import com.masterofcode.vocaburise.screens.auth.signUp.SignUpFragment
 import org.jetbrains.anko.startActivity
 
 /**

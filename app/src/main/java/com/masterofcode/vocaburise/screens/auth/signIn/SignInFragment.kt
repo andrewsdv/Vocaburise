@@ -1,4 +1,4 @@
-package com.masterofcode.vocaburise.screens.auth.sign_in
+package com.masterofcode.vocaburise.screens.auth.signIn
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,7 @@ import com.masterofcode.vocaburise.MainActivity
 import com.masterofcode.vocaburise.R
 import com.masterofcode.vocaburise.base.BaseBoundVmFragment
 import com.masterofcode.vocaburise.databinding.FragmentSignInBinding
-import com.masterofcode.vocaburise.screens.auth.sign_up.SignUpFragment
+import com.masterofcode.vocaburise.screens.auth.signUp.SignUpFragment
 
 /**
  * Created by andrews on 24.04.18.

@@ -1,4 +1,4 @@
-package com.masterofcode.vocaburise.screens.auth.sign_in
+package com.masterofcode.vocaburise.screens.auth.signIn
 
 import android.databinding.Bindable
 import com.masterofcode.vocaburise.BR
@@ -63,7 +63,7 @@ class SignInViewModel : BaseViewModel() {
     fun signIn() {
         validateInputs()
         if (isDataValid()) {
-            UserPrefsManager.signIn(email, password)
+            UserPrefsManager.signIn(email, password) //TODO: should be called through ApiRepository instead of prefs
                     .async()
                     .doOnSubscribe { progressBarVisible = true }
                     .takeUntilCleared()

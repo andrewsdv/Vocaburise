@@ -1,4 +1,4 @@
-package com.masterofcode.vocaburise.screens.auth.sign_in
+package com.masterofcode.vocaburise.screens.auth.signIn
 
 /**
  * Created by andrews on 24.04.18.
