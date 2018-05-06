@@ -2,6 +2,7 @@ package com.masterofcode.vocaburise.api
 
 import com.masterofcode.vocaburise.api.bodies.SignUpData
 import com.masterofcode.vocaburise.models.User
+import io.reactivex.Completable
 import io.reactivex.Observable
 import retrofit2.adapter.rxjava2.Result
 import retrofit2.http.Body
@@ -21,4 +22,6 @@ interface ApiService {
     @POST("users/register")
     fun signUp(@Body data: SignUpData): Observable<Result<User>>
 
+    @GET("users/logout")
+    fun signOut(): Completable
 }

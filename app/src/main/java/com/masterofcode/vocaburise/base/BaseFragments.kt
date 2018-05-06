@@ -38,6 +38,11 @@ abstract class BaseFragment(
     protected inline fun <reified TViewModel: ViewModel> getActivityViewModel(): TViewModel {
         return ViewModelProviders.of(activity!!).get(TViewModel::class.java)
     }
+
+    fun showErrorSnackbar(view: View, message: String, throwable: Throwable? = null) {
+        Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+                .setAction(android.R.string.ok, { }).show()
+    }
 }
 
 abstract class BaseBoundFragment<out TBinding : ViewDataBinding>(layoutId: Int) : BaseFragment(layoutId) {
@@ -64,10 +69,5 @@ abstract class BaseBoundVmFragment<out TBinding : ViewDataBinding, out TViewMode
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (autoBindVm) binding.setVariable(BR.vm, vm)
-    }
-
-    fun showErrorSnackbar(view: View, message: String, throwable: Throwable? = null) {
-        Snackbar.make(view, message, Snackbar.LENGTH_LONG)
-                .setAction(android.R.string.ok, { }).show()
     }
 }

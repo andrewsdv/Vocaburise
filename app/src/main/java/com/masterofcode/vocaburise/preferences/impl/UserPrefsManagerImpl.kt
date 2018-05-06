@@ -7,6 +7,7 @@ import com.masterofcode.vocaburise.api.bodies.SignUpData
 import com.masterofcode.vocaburise.errorHandling.NetworkErrorWrapper
 import com.masterofcode.vocaburise.models.User
 import com.masterofcode.vocaburise.preferences.IUserPrefsManager
+import io.reactivex.Completable
 import io.reactivex.Observable
 import retrofit2.adapter.rxjava2.Result
 
@@ -50,6 +51,13 @@ class UserPrefsManagerImpl : IUserPrefsManager {
                         throw NetworkErrorWrapper(message)
                     }
                     UserPrefs.accessToken = it.response().headers().get("Authorization")
+                }
+    }
+
+    override fun signOut(): Completable {
+        return Completable.defer { apiRepo.signOut() }
+                .doOnComplete {
+                    UserPrefs.accessToken = null
                 }
     }
 }

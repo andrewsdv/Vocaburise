@@ -2,21 +2,26 @@ package com.masterofcode.vocaburise
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.masterofcode.vocaburise.R.id.contentView
+import com.masterofcode.vocaburise.base.BaseActivity
 import com.masterofcode.vocaburise.preferences.UserPrefsManager
+import com.masterofcode.vocaburise.screens.addWord.AddWordActivity
 import com.masterofcode.vocaburise.screens.auth.AuthActivity
 import com.masterofcode.vocaburise.screens.auth.AuthState
+import com.masterofcode.vocaburise.utils.async
+import com.masterofcode.vocaburise.utils.strRes
+import com.masterofcode.vocaburise.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -30,8 +35,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            AddWordActivity.start(this)
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -81,11 +85,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_manage -> {
 
             }
-            R.id.nav_share -> {
 
-            }
-            R.id.nav_send -> {
-
+            R.id.sign_out -> {
+                UserPrefsManager.signOut()
+                        .async()
+                        .subscribe({
+                            toast(strRes(R.string.done))
+                            AuthActivity.start(this, AuthState.SIGN_IN)
+                            finish()
+                        }, {
+                            drawer_layout.closeDrawer(GravityCompat.START)
+                            it.message?.let { showErrorSnackbar(find(contentView), it) }
+                        }
+                        )
             }
         }
 

@@ -5,6 +5,7 @@ import android.support.annotation.StringRes
 import android.support.design.widget.TextInputLayout
 import android.widget.Toast
 import com.masterofcode.vocaburise.BaseApp
+import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,11 +16,11 @@ import io.reactivex.schedulers.Schedulers
  */
 
 
-fun Any.strRes(@StringRes resId: Int, vararg formatArgs: Any): String {
+fun strRes(@StringRes resId: Int, vararg formatArgs: Any): String {
     return BaseApp.app.getString(resId, *formatArgs)
 }
 
-fun Any.toast(message: CharSequence) =
+fun toast(message: CharSequence) =
         Toast.makeText(BaseApp.app, message, Toast.LENGTH_LONG).show()
 
 // Rx Java extensions
@@ -30,6 +31,10 @@ fun <T> Single<T>.async(): Single<T> = subscribeOnIoThread().observeOnMainThread
 fun <T> Observable<T>.subscribeOnIoThread(): Observable<T> = subscribeOn(Schedulers.io())
 fun <T> Observable<T>.observeOnMainThread(): Observable<T> = observeOn(AndroidSchedulers.mainThread())
 fun <T> Observable<T>.async(): Observable<T> = subscribeOnIoThread().observeOnMainThread()
+
+fun Completable.subscribeOnIoThread(): Completable = subscribeOn(Schedulers.io())
+fun Completable.observeOnMainThread(): Completable = observeOn(AndroidSchedulers.mainThread())
+fun Completable.async(): Completable = subscribeOnIoThread().observeOnMainThread()
 
 // Binding extensions
 @BindingAdapter("errorText")

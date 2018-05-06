@@ -17,6 +17,8 @@
     <string name="errorUnknown">Something went wrong</string>
     <string name="done">Done!</string>
     <string name="save">Save</string>
+    <string name="signOut">Sign out</string>
+    <string name="settings">Settings</string>
     <string name="addWordsScreenWord">Word</string>
     <string name="addWordsScreenTranslation">Translation</string>
 

@@ -2,6 +2,7 @@ package com.masterofcode.vocaburise.preferences
 
 import com.masterofcode.vocaburise.api.bodies.SignUpData
 import com.masterofcode.vocaburise.models.User
+import io.reactivex.Completable
 import io.reactivex.Observable
 import retrofit2.adapter.rxjava2.Result
 
@@ -14,4 +15,5 @@ interface IUserPrefsManager {
     fun isLoggedIn(): Boolean
     fun signIn(email: String, password: String): Observable<Result<User>>
     fun signUp(data: SignUpData): Observable<Result<User>>
+    fun signOut(): Completable
 }
