@@ -7,6 +7,7 @@ import com.masterofcode.vocaburise.BuildConfig
 import com.masterofcode.vocaburise.api.ApiService
 import com.masterofcode.vocaburise.api.IApiRepository
 import com.masterofcode.vocaburise.api.bodies.SignUpData
+import com.masterofcode.vocaburise.models.Word
 import com.masterofcode.vocaburise.preferences.UserPrefsManager
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
@@ -77,4 +78,6 @@ class NetworkApiRepositoryImpl : IApiRepository {
     override fun signUp(data: SignUpData) = api.signUp(data)
 
     override fun signOut() = api.signOut()
+
+    override fun addWord(word: Word) = api.addWord(word)
 }
