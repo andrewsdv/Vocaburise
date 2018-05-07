@@ -3,14 +3,12 @@ package com.masterofcode.vocaburise.api
 import com.masterofcode.vocaburise.api.bodies.SignUpData
 import com.masterofcode.vocaburise.models.User
 import com.masterofcode.vocaburise.models.Word
+import com.masterofcode.vocaburise.utils.Constants
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.adapter.rxjava2.Result
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * Created by andrews on 30.04.18.
@@ -29,4 +27,7 @@ interface ApiService {
 
     @POST("words/")
     fun addWord(@Body word: Word): Single<Boolean>
+
+    @GET("words/{id_category}")
+    fun getWords(@Path("id_category") categoryId: Int = Constants.DEFAULT_CATEGORY_ID): Single<List<Word>>
 }

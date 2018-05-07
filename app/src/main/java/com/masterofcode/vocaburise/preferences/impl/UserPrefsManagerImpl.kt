@@ -17,6 +17,8 @@ import retrofit2.adapter.rxjava2.Result
 
 private object UserPrefs : KotprefModel() {
 
+    var name by nullableStringPref()
+    var email by nullableStringPref()
     var accessToken by nullableStringPref()
 
 }
@@ -24,6 +26,10 @@ private object UserPrefs : KotprefModel() {
 class UserPrefsManagerImpl : IUserPrefsManager {
 
     private val apiRepo: IApiRepository = ApiRepository
+
+    override fun getName() = UserPrefs.name ?: ""
+
+    override fun getEmail() = UserPrefs.email ?: ""
 
     override val accessToken: String?
         get() = UserPrefs.accessToken
@@ -40,6 +46,8 @@ class UserPrefsManagerImpl : IUserPrefsManager {
                         throw NetworkErrorWrapper(message)
                     }
                     UserPrefs.accessToken = it.response().headers().get("Authorization")
+                    UserPrefs.name = it.response().body().name
+                    UserPrefs.email = it.response().body().email
                 }
     }
 

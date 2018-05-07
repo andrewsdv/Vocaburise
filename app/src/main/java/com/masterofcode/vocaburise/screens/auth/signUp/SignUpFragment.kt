@@ -2,7 +2,7 @@ package com.masterofcode.vocaburise.screens.auth.signUp
 
 import android.os.Bundle
 import android.view.View
-import com.masterofcode.vocaburise.MainActivity
+import com.masterofcode.vocaburise.screens.MainActivity
 import com.masterofcode.vocaburise.R
 import com.masterofcode.vocaburise.base.BaseBoundVmFragment
 import com.masterofcode.vocaburise.databinding.FragmentSignUpBinding

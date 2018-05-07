@@ -1,4 +1,4 @@
-package com.masterofcode.vocaburise
+package com.masterofcode.vocaburise.screens
 
 import android.app.Activity
 import android.os.Bundle
@@ -7,8 +7,10 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
+import com.masterofcode.vocaburise.R
 import com.masterofcode.vocaburise.R.id.contentView
-import com.masterofcode.vocaburise.base.BaseActivity
+import com.masterofcode.vocaburise.base.BaseBoundVmActivity
+import com.masterofcode.vocaburise.databinding.ActivityMainBinding
 import com.masterofcode.vocaburise.preferences.UserPrefsManager
 import com.masterofcode.vocaburise.screens.addWord.AddWordActivity
 import com.masterofcode.vocaburise.screens.auth.AuthActivity
@@ -21,12 +23,16 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
-class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseBoundVmActivity<ActivityMainBinding, MainActivityViewModel>(
+        R.layout.activity_main, MainActivityViewModel::class),
+        MainActivityInteractor, NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        vm.init(this)
 
         if (!UserPrefsManager.isLoggedIn()) {
             AuthActivity.start(this, AuthState.SIGN_IN)
@@ -73,16 +79,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
-            }
-            R.id.nav_gallery -> {
+            R.id.nav_goals -> {
 
             }
-            R.id.nav_slideshow -> {
-
-            }
-            R.id.nav_manage -> {
+            R.id.nav_achievements -> {
 
             }
 
@@ -99,10 +99,17 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                         }
                         )
             }
+            R.id.settings -> {
+
+            }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun showErrorSnackbar(message: String, throwable: Throwable?) {
+        showErrorSnackbar(binding.drawerLayout, message)
     }
 
     companion object {

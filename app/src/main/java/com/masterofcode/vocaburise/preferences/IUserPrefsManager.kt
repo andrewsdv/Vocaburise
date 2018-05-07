@@ -12,6 +12,8 @@ import retrofit2.adapter.rxjava2.Result
 interface IUserPrefsManager {
     val accessToken: String?
 
+    fun getName(): String
+    fun getEmail(): String
     fun isLoggedIn(): Boolean
     fun signIn(email: String, password: String): Observable<Result<User>>
     fun signUp(data: SignUpData): Observable<Result<User>>
