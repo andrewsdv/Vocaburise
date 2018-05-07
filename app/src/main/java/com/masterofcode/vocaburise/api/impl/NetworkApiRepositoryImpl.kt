@@ -30,7 +30,7 @@ class NetworkApiRepositoryImpl : IApiRepository {
                         UserPrefsManager.accessToken?.let {
                             chain.proceed(
                                     request.newBuilder()
-                                            .addHeader("Authorization", "Bearer $it")
+                                            .addHeader("Authorization", "$it")
                                             .build()
                             )
                         } ?: chain.proceed(request)

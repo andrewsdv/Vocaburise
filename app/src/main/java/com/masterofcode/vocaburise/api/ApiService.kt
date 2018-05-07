@@ -24,9 +24,9 @@ interface ApiService {
     @POST("users/register")
     fun signUp(@Body data: SignUpData): Observable<Result<User>>
 
-    @POST("users/logout")
+    @GET("users/logout")
     fun signOut(): Completable
 
-    @POST("words")
+    @POST("words/")
     fun addWord(@Body word: Word): Single<Boolean>
 }

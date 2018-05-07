@@ -23,7 +23,7 @@ private object UserPrefs : KotprefModel() {
 
 class UserPrefsManagerImpl : IUserPrefsManager {
 
-    private val apiRepo: IApiRepository = ApiRepository()
+    private val apiRepo: IApiRepository = ApiRepository
 
     override val accessToken: String?
         get() = UserPrefs.accessToken
