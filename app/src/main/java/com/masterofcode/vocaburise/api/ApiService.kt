@@ -28,6 +28,6 @@ interface ApiService {
     @POST("words/")
     fun addWord(@Body word: Word): Single<Boolean>
 
-    @GET("words/{id_category}")
-    fun getWords(@Path("id_category") categoryId: Int = Constants.DEFAULT_CATEGORY_ID): Single<List<Word>>
+    @GET("words/")
+    fun getWords(@Query("id_category") categoryId: Int = Constants.DEFAULT_CATEGORY_ID): Single<List<Word>>
 }
