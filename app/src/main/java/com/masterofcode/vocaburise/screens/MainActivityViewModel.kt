@@ -17,6 +17,10 @@ class MainActivityViewModel : BaseViewModel() {
 
     var words = emptyList<Word>().toString()
         @Bindable get
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.words)
+        }
 
     var progressBarVisible: Boolean = false
         @Bindable get
@@ -35,10 +39,11 @@ class MainActivityViewModel : BaseViewModel() {
                 .async()
                 .doOnSubscribe { progressBarVisible = true }
                 .takeUntilCleared()
-                .doOnEvent { _, _ -> progressBarVisible = false }
                 .subscribe({
+                    progressBarVisible = false
                     words = it.toString()
                 }, {
+                    progressBarVisible = false
                     showErrorMessage(it)
                 })
     }
