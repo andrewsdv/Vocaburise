@@ -14,27 +14,11 @@
     </data>
 
     <FrameLayout
+        android:id="@+id/contentView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                android:paddingStart="?attr/actionBarSize"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:title="@string/addWordsScreenTitle" />
-
-        </android.support.design.widget.AppBarLayout>
-
         <LinearLayout
-            android:id="@+id/contentView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

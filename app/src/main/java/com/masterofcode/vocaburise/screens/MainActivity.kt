@@ -12,6 +12,7 @@ import com.masterofcode.vocaburise.screens.addWord.AddWordActivity
 import com.masterofcode.vocaburise.screens.auth.AuthActivity
 import com.masterofcode.vocaburise.screens.auth.AuthState
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
 class MainActivity : BaseBoundVmActivity<ActivityMainBinding, MainActivityViewModel>(
@@ -48,13 +49,17 @@ class MainActivity : BaseBoundVmActivity<ActivityMainBinding, MainActivityViewMo
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
+            R.id.action_signOut -> {
+                showErrorSnackbar("TODO", null)
+                return true
+            }
             R.id.action_settings -> return true
             else -> return super.onOptionsItemSelected(item)
         }
     }
 
     override fun showErrorSnackbar(message: String, throwable: Throwable?) {
-        showErrorSnackbar(binding.overlay, message)
+        showErrorSnackbar(find(R.id.contentView), message)
     }
 
     companion object {

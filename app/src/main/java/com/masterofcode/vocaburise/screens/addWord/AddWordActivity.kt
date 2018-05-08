@@ -4,13 +4,14 @@ import android.app.Activity
 import com.masterofcode.vocaburise.R
 import com.masterofcode.vocaburise.base.BaseBoundVmActivity
 import com.masterofcode.vocaburise.databinding.ActivityAddWordBinding
+import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
 class AddWordActivity : BaseBoundVmActivity<ActivityAddWordBinding, AddWordViewModel>(
         R.layout.activity_add_word, AddWordViewModel::class), AddWordInteractor {
 
     override fun showErrorSnackbar(message: String) {
-        showErrorSnackbar(binding.contentView, message)
+        showErrorSnackbar(find(R.id.contentView), message)
     }
 
     companion object {

@@ -37,13 +37,13 @@ class MainActivityViewModel : BaseViewModel() {
     private fun getWords() {
         ApiRepository.getWords()
                 .async()
-                .doOnSubscribe { progressBarVisible = true }
+                .doOnSubscribe { /*progressBarVisible = true*/ }
                 .takeUntilCleared()
                 .subscribe({
-                    progressBarVisible = false
+                    /*progressBarVisible = false*/
                     words = it.toString()
                 }, {
-                    progressBarVisible = false
+                    /*progressBarVisible = false*/
                     showErrorMessage(it)
                 })
     }

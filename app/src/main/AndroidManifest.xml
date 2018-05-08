@@ -3,8 +3,8 @@
     package="com.masterofcode.vocaburise">
 
     <application
-        android:allowBackup="true"
         android:name=".BaseApp"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -21,7 +21,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".screens.auth.AuthActivity" />
-        <activity android:name=".screens.addWord.AddWordActivity" />
+        <activity
+            android:name=".screens.addWord.AddWordActivity"
+            android:label="@string/addWordsScreenTitle" />
     </application>
 
 </manifest>
