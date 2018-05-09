@@ -22,6 +22,10 @@ class MainActivityViewModel : BaseViewModel() {
 
     var wordsNumber = strRes(R.string.mainScreenWordsNumber, strRes(R.string.no))
         @Bindable get
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.wordsNumber)
+        }
 
     var words = emptyList<Word>()
 
