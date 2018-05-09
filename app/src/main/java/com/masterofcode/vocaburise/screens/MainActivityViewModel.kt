@@ -6,8 +6,10 @@ import com.masterofcode.vocaburise.R
 import com.masterofcode.vocaburise.api.ApiRepository
 import com.masterofcode.vocaburise.base.BaseViewModel
 import com.masterofcode.vocaburise.models.Word
+import com.masterofcode.vocaburise.preferences.UserPrefsManager
 import com.masterofcode.vocaburise.utils.async
 import com.masterofcode.vocaburise.utils.strRes
+import com.masterofcode.vocaburise.utils.toast
 import com.masterofcode.vocaburise.utils.weak
 
 
@@ -15,12 +17,13 @@ class MainActivityViewModel : BaseViewModel() {
 
     var interactor by weak<MainActivityInteractor>()
 
-    var words = emptyList<Word>().toString()
+    var welcomeMessage = strRes(R.string.mainScreenWelcomeMessage, UserPrefsManager.getName())
         @Bindable get
-        set(value) {
-            field = value
-            notifyPropertyChanged(BR.words)
-        }
+
+    var wordsNumber = strRes(R.string.mainScreenWordsNumber, strRes(R.string.no))
+        @Bindable get
+
+    var words = emptyList<Word>()
 
     var progressBarVisible: Boolean = false
         @Bindable get
@@ -34,14 +37,15 @@ class MainActivityViewModel : BaseViewModel() {
         fetchWords()
     }
 
-    private fun fetchWords() {
+    fun fetchWords() {
         ApiRepository.getWords()
                 .async()
                 .doOnSubscribe { progressBarVisible = true }
                 .takeUntilCleared()
                 .subscribe({
                     progressBarVisible = false
-                    words = it.toString()
+                    words = it.data
+                    wordsNumber = strRes(R.string.mainScreenWordsNumber, it.data.size)
                 }, {
                     progressBarVisible = false
                     showErrorMessage(it)
@@ -51,5 +55,9 @@ class MainActivityViewModel : BaseViewModel() {
     private fun showErrorMessage(throwable: Throwable) {
         val message = throwable.message ?: strRes(R.string.errorUnknown)
         interactor?.showErrorSnackbar(message, throwable)
+    }
+
+    fun startLearning() {
+        toast("TODO")
     }
 }

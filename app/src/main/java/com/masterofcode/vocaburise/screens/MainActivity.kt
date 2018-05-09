@@ -22,13 +22,13 @@ class MainActivity : BaseBoundVmActivity<ActivityMainBinding, MainActivityViewMo
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
 
-        vm.init(this)
-
         if (!UserPrefsManager.isLoggedIn()) {
             AuthActivity.start(this, AuthState.SIGN_IN)
             finish()
             return
         }
+
+        vm.init(this)
 
         fab.setOnClickListener { view ->
             AddWordActivity.start(this)

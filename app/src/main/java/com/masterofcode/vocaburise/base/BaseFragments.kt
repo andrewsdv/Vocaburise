@@ -45,7 +45,7 @@ abstract class BaseFragment(
     }
 
     fun showErrorSnackbar(view: View, message: String, throwable: Throwable? = null) {
-        if ((throwable as HttpException).code() == 401) {
+        if (throwable is HttpException && throwable.code() == 401) {
             toast("Token expired...")
             UserPrefsManager.clearAccessToken()
             AuthActivity.start(activity!!, AuthState.SIGN_IN)
