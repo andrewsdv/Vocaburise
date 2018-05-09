@@ -22,8 +22,7 @@
         </activity>
         <activity android:name=".screens.auth.AuthActivity" />
         <activity
-            android:name=".screens.addWord.AddWordActivity"
-            android:label="@string/addWordsScreenTitle" />
+            android:name=".screens.addWord.AddWordActivity" />
     </application>
 
 </manifest>

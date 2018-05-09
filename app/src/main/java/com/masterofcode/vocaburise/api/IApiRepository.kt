@@ -3,6 +3,7 @@ package com.masterofcode.vocaburise.api
 import com.masterofcode.vocaburise.api.bodies.SignUpData
 import com.masterofcode.vocaburise.models.User
 import com.masterofcode.vocaburise.models.Word
+import com.masterofcode.vocaburise.models.Words
 import com.masterofcode.vocaburise.utils.Constants.DEFAULT_CATEGORY_ID
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -18,5 +19,5 @@ interface IApiRepository {
     fun signOut(): Completable
 
     fun addWord(word: Word): Single<Boolean>
-    fun getWords(): Single<List<Word>>
+    fun getWords(): Single<Words>
 }

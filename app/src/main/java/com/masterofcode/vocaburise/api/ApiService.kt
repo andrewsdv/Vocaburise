@@ -3,6 +3,7 @@ package com.masterofcode.vocaburise.api
 import com.masterofcode.vocaburise.api.bodies.SignUpData
 import com.masterofcode.vocaburise.models.User
 import com.masterofcode.vocaburise.models.Word
+import com.masterofcode.vocaburise.models.Words
 import com.masterofcode.vocaburise.utils.Constants
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -29,5 +30,5 @@ interface ApiService {
     fun addWord(@Body word: Word): Single<Boolean>
 
     @GET("words/")
-    fun getWords(@Query("id_category") categoryId: Int = Constants.DEFAULT_CATEGORY_ID): Single<List<Word>>
+    fun getWords(@Query("id_category") categoryId: Int = Constants.DEFAULT_CATEGORY_ID): Single<Words>
 }

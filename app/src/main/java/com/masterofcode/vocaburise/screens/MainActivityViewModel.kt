@@ -1,7 +1,6 @@
 package com.masterofcode.vocaburise.screens
 
 import android.databinding.Bindable
-import android.provider.UserDictionary
 import com.masterofcode.vocaburise.BR
 import com.masterofcode.vocaburise.R
 import com.masterofcode.vocaburise.api.ApiRepository
@@ -10,6 +9,7 @@ import com.masterofcode.vocaburise.models.Word
 import com.masterofcode.vocaburise.utils.async
 import com.masterofcode.vocaburise.utils.strRes
 import com.masterofcode.vocaburise.utils.weak
+
 
 class MainActivityViewModel : BaseViewModel() {
 
@@ -22,6 +22,20 @@ class MainActivityViewModel : BaseViewModel() {
             notifyPropertyChanged(BR.words)
         }
 
+    var test = "test"
+        @Bindable get
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.test)
+        }
+
+//    var progressBarVisible: Boolean = false
+/*        @Bindable get
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.progressBarVisible)
+        }*/
+
     var progressBarVisible: Boolean = false
         @Bindable get
         set(value) {
@@ -31,10 +45,13 @@ class MainActivityViewModel : BaseViewModel() {
 
     fun init(interactor: MainActivityInteractor) {
         this.interactor = interactor
-        getWords()
+        fetchWords()
+        interactor.showErrorSnackbar("test", null)
     }
 
-    private fun getWords() {
+    fun fetchWords() {
+        interactor?.showErrorSnackbar("test", null)
+
         ApiRepository.getWords()
                 .async()
                 .doOnSubscribe { /*progressBarVisible = true*/ }
@@ -42,6 +59,7 @@ class MainActivityViewModel : BaseViewModel() {
                 .subscribe({
                     /*progressBarVisible = false*/
                     words = it.toString()
+                    words = "TEST"
                 }, {
                     /*progressBarVisible = false*/
                     showErrorMessage(it)

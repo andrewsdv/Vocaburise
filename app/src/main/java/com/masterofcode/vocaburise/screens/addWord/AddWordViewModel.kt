@@ -76,7 +76,7 @@ class AddWordViewModel : BaseViewModel() {
     fun save() {
         validateInputs()
         if (isDataValid()) {
-            ApiRepository.addWord(Word())
+            ApiRepository.addWord(Word(word = word, translation = translation))
                     .async()
                     .doOnSubscribe { progressBarVisible = true }
                     .takeUntilCleared()
