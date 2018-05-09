@@ -68,4 +68,8 @@ class UserPrefsManagerImpl : IUserPrefsManager {
                     UserPrefs.accessToken = null
                 }
     }
+
+    override fun clearAccessToken() {
+        UserPrefs.accessToken = null
+    }
 }

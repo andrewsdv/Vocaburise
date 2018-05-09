@@ -94,6 +94,6 @@ class AddWordViewModel : BaseViewModel() {
 
     private fun showErrorMessage(throwable: Throwable) {
         val message = throwable.message ?: strRes(R.string.errorUnknown)
-        interactor?.showErrorSnackbar(message)
+        interactor?.showErrorSnackbar(message, throwable)
     }
 }

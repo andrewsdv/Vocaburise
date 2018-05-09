@@ -16,13 +16,11 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
 class MainActivity : BaseBoundVmActivity<ActivityMainBinding, MainActivityViewModel>(
-        R.layout.activity_main, MainActivityViewModel::class),
-        MainActivityInteractor {
+        R.layout.activity_main, MainActivityViewModel::class), MainActivityInteractor {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         vm.init(this)
 
@@ -59,7 +57,7 @@ class MainActivity : BaseBoundVmActivity<ActivityMainBinding, MainActivityViewMo
     }
 
     override fun showErrorSnackbar(message: String, throwable: Throwable?) {
-        showErrorSnackbar(find(R.id.contentView), message)
+        showErrorSnackbar(find(R.id.contentView), message, throwable)
     }
 
     companion object {

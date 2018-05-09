@@ -18,4 +18,5 @@ interface IUserPrefsManager {
     fun signIn(email: String, password: String): Observable<Result<User>>
     fun signUp(data: SignUpData): Observable<Result<User>>
     fun signOut(): Completable
+    fun clearAccessToken()
 }

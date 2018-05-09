@@ -11,9 +11,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.masterofcode.vocaburise.BR
+import com.masterofcode.vocaburise.preferences.UserPrefsManager
+import com.masterofcode.vocaburise.screens.auth.AuthActivity
+import com.masterofcode.vocaburise.screens.auth.AuthState
+import com.masterofcode.vocaburise.utils.toast
 import com.trello.rxlifecycle2.components.support.RxFragment
 import io.reactivex.Maybe
 import io.reactivex.subjects.PublishSubject
+import retrofit2.HttpException
 import kotlin.reflect.KClass
 
 /**
@@ -40,8 +45,15 @@ abstract class BaseFragment(
     }
 
     fun showErrorSnackbar(view: View, message: String, throwable: Throwable? = null) {
-        Snackbar.make(view, message, Snackbar.LENGTH_LONG)
-                .setAction(android.R.string.ok, { }).show()
+        if ((throwable as HttpException).code() == 401) {
+            toast("Token expired...")
+            UserPrefsManager.clearAccessToken()
+            AuthActivity.start(activity!!, AuthState.SIGN_IN)
+            activity?.finish()
+        } else {
+            Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+                    .setAction(android.R.string.ok, { }).show()
+        }
     }
 }
 

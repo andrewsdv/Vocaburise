@@ -10,8 +10,8 @@ import org.jetbrains.anko.startActivity
 class AddWordActivity : BaseBoundVmActivity<ActivityAddWordBinding, AddWordViewModel>(
         R.layout.activity_add_word, AddWordViewModel::class), AddWordInteractor {
 
-    override fun showErrorSnackbar(message: String) {
-        showErrorSnackbar(find(R.id.contentView), message)
+    override fun showErrorSnackbar(message: String, throwable: Throwable?) {
+        showErrorSnackbar(find(R.id.contentView), message, throwable)
     }
 
     companion object {

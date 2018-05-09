@@ -10,11 +10,16 @@ import android.support.annotation.IdRes
 import android.support.annotation.LayoutRes
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import com.masterofcode.vocaburise.BR
 import android.view.View
+import com.masterofcode.vocaburise.BR
+import com.masterofcode.vocaburise.preferences.UserPrefsManager
+import com.masterofcode.vocaburise.screens.auth.AuthActivity
+import com.masterofcode.vocaburise.screens.auth.AuthState
+import com.masterofcode.vocaburise.utils.toast
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import io.reactivex.Maybe
 import io.reactivex.subjects.PublishSubject
+import retrofit2.HttpException
 import kotlin.reflect.KClass
 
 /**
@@ -61,9 +66,16 @@ abstract class BaseActivity(
             transaction.commitNow()
     }
 
-    fun showErrorSnackbar(view: View, message: String) {
-        Snackbar.make(view, message, Snackbar.LENGTH_LONG)
-                .setAction(android.R.string.ok, { }).show()
+    fun showErrorSnackbar(view: View, message: String, throwable: Throwable?) {
+        if ((throwable as HttpException).code() == 401) {
+            toast("Token expired...")
+            UserPrefsManager.clearAccessToken()
+            AuthActivity.start(this, AuthState.SIGN_IN)
+            finish()
+        } else {
+            Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+                    .setAction(android.R.string.ok, { }).show()
+        }
     }
 }
 

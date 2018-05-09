@@ -22,20 +22,6 @@ class MainActivityViewModel : BaseViewModel() {
             notifyPropertyChanged(BR.words)
         }
 
-    var test = "test"
-        @Bindable get
-        set(value) {
-            field = value
-            notifyPropertyChanged(BR.test)
-        }
-
-//    var progressBarVisible: Boolean = false
-/*        @Bindable get
-        set(value) {
-            field = value
-            notifyPropertyChanged(BR.progressBarVisible)
-        }*/
-
     var progressBarVisible: Boolean = false
         @Bindable get
         set(value) {
@@ -46,22 +32,18 @@ class MainActivityViewModel : BaseViewModel() {
     fun init(interactor: MainActivityInteractor) {
         this.interactor = interactor
         fetchWords()
-        interactor.showErrorSnackbar("test", null)
     }
 
-    fun fetchWords() {
-        interactor?.showErrorSnackbar("test", null)
-
+    private fun fetchWords() {
         ApiRepository.getWords()
                 .async()
-                .doOnSubscribe { /*progressBarVisible = true*/ }
+                .doOnSubscribe { progressBarVisible = true }
                 .takeUntilCleared()
                 .subscribe({
-                    /*progressBarVisible = false*/
+                    progressBarVisible = false
                     words = it.toString()
-                    words = "TEST"
                 }, {
-                    /*progressBarVisible = false*/
+                    progressBarVisible = false
                     showErrorMessage(it)
                 })
     }
