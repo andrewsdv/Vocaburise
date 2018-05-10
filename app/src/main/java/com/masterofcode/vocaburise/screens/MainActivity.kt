@@ -11,6 +11,7 @@ import com.masterofcode.vocaburise.preferences.UserPrefsManager
 import com.masterofcode.vocaburise.screens.addWord.AddWordActivity
 import com.masterofcode.vocaburise.screens.auth.AuthActivity
 import com.masterofcode.vocaburise.screens.auth.AuthState
+import com.masterofcode.vocaburise.utils.strRes
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
@@ -21,6 +22,8 @@ class MainActivity : BaseBoundVmActivity<ActivityMainBinding, MainActivityViewMo
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
+        setSupportActionBar(findViewById(R.id.my_toolbar))
+        supportActionBar?.title = strRes(R.string.app_name).toUpperCase()
 
         if (!UserPrefsManager.isLoggedIn()) {
             AuthActivity.start(this, AuthState.SIGN_IN)

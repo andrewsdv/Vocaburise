@@ -7,6 +7,7 @@ import com.masterofcode.vocaburise.R
 import com.masterofcode.vocaburise.base.BaseActivity
 import com.masterofcode.vocaburise.screens.auth.signIn.SignInFragment
 import com.masterofcode.vocaburise.screens.auth.signUp.SignUpFragment
+import com.masterofcode.vocaburise.utils.strRes
 import org.jetbrains.anko.startActivity
 
 /**
@@ -29,6 +30,8 @@ class AuthActivity : BaseActivity(R.layout.activity_auth), AuthInteractor {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setSupportActionBar(findViewById(R.id.my_toolbar))
+        supportActionBar?.title = strRes(R.string.auth_screen_title).toUpperCase()
 
         val authState = AuthState.valueOf(intent.extras.get(EXTRA_STATE).toString())
         val fragment = getFragment(authState)

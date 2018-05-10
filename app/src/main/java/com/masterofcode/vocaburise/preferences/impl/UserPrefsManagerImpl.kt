@@ -46,8 +46,8 @@ class UserPrefsManagerImpl : IUserPrefsManager {
                         throw NetworkErrorWrapper(message)
                     }
                     UserPrefs.accessToken = it.response().headers().get("Authorization")
-                    UserPrefs.name = it.response().body().name
-                    UserPrefs.email = it.response().body().email
+                    UserPrefs.name = it.response().body().name // TODO: 10.05.18 is null currently
+                    UserPrefs.email = it.response().body().email // TODO: 10.05.18 is null currently
                 }
     }
 

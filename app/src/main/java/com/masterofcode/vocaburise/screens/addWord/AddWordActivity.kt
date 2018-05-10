@@ -1,14 +1,22 @@
 package com.masterofcode.vocaburise.screens.addWord
 
 import android.app.Activity
+import android.os.Bundle
 import com.masterofcode.vocaburise.R
 import com.masterofcode.vocaburise.base.BaseBoundVmActivity
 import com.masterofcode.vocaburise.databinding.ActivityAddWordBinding
+import com.masterofcode.vocaburise.utils.strRes
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
 class AddWordActivity : BaseBoundVmActivity<ActivityAddWordBinding, AddWordViewModel>(
         R.layout.activity_add_word, AddWordViewModel::class), AddWordInteractor {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setSupportActionBar(findViewById(R.id.my_toolbar))
+        supportActionBar?.title = strRes(R.string.addWordsScreenTitle).toUpperCase()
+    }
 
     override fun showErrorSnackbar(message: String, throwable: Throwable?) {
         showErrorSnackbar(find(R.id.contentView), message, throwable)

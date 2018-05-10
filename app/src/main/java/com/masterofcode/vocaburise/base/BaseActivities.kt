@@ -67,7 +67,7 @@ abstract class BaseActivity(
     }
 
     fun showErrorSnackbar(view: View, message: String, throwable: Throwable?) {
-        if ((throwable as HttpException).code() == 401) {
+        if (throwable is HttpException && throwable.code() == 401) {
             toast("Token expired...")
             UserPrefsManager.clearAccessToken()
             AuthActivity.start(this, AuthState.SIGN_IN)
