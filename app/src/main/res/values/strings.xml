@@ -19,7 +19,7 @@
     <string name="signInScreenEmailEmptyError">Please enter email</string>
     <string name="signInScreenPasswordEmptyError">Please enter password</string>
 
-    <string name="mainScreenWelcomeMessage">Welcome back, %s!</string>
+    <string name="mainScreenWelcomeMessage">Welcome back!</string>
     <string name="mainScreenWordsNumber">You have %s words assigned for today</string>
     <string name="mainScreenStartLearning">Start learning!</string>
 

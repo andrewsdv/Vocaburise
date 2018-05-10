@@ -82,7 +82,7 @@ class AddWordViewModel : BaseViewModel() {
                     .takeUntilCleared()
                     .subscribe({
                         progressBarVisible = false
-                        toast(strRes(R.string.done))
+                        clearInputs()
                         interactor?.finish()
                     }, {
                         progressBarVisible = false
@@ -90,6 +90,11 @@ class AddWordViewModel : BaseViewModel() {
                     }
                     )
         }
+    }
+
+    private fun clearInputs() {
+        word = ""
+        translation = ""
     }
 
     private fun showErrorMessage(throwable: Throwable) {

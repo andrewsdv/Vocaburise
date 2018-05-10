@@ -69,7 +69,6 @@ class SignInViewModel : BaseViewModel() {
                     .takeUntilCleared()
                     .subscribe({
                         progressBarVisible = false
-                        toast(strRes(R.string.done))
                         interactor?.openWordsScreen()
                     }, {
                         progressBarVisible = false

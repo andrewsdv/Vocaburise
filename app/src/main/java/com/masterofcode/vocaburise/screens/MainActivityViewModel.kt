@@ -6,7 +6,6 @@ import com.masterofcode.vocaburise.R
 import com.masterofcode.vocaburise.api.ApiRepository
 import com.masterofcode.vocaburise.base.BaseViewModel
 import com.masterofcode.vocaburise.models.Word
-import com.masterofcode.vocaburise.preferences.UserPrefsManager
 import com.masterofcode.vocaburise.utils.async
 import com.masterofcode.vocaburise.utils.strRes
 import com.masterofcode.vocaburise.utils.toast
@@ -17,7 +16,7 @@ class MainActivityViewModel : BaseViewModel() {
 
     var interactor by weak<MainActivityInteractor>()
 
-    var welcomeMessage = strRes(R.string.mainScreenWelcomeMessage, UserPrefsManager.getName())
+    var welcomeMessage = strRes(R.string.mainScreenWelcomeMessage) // TODO: 10.05.18 include username
         @Bindable get
 
     var wordsNumber = strRes(R.string.mainScreenWordsNumber, strRes(R.string.no))
